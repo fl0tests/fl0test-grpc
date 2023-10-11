@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package canary;
+
+service canary {
+ rpc Healthcheck(HealthcheckRequest) returns (HealtcheckResponse);
+ rpc Stats(StatsRequest) returns (stream StatsResponse);
+}
+
+message HealthcheckRequest {}
+
+message HealtcheckResponse {
+    string message = 1;
+    string timestamp = 2;
+    uint32 served = 3;
+}
+
+message StatsRequest {
+    uint32 max_messages = 1;
+}
+
+message StatsResponse {
+    string message = 1;
+    string timestamp = 2;
+    uint32 message_count = 3;
+    string message_id = 4;
+}
